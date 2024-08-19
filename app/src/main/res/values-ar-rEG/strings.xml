@@ -1,17 +1,17 @@
 <resources>
-    <string name="app_name">Islami V2</string>
-    <string name="this_is_the_background_image_for_the_intro_screen">This is the background image for the Intro Screen</string>
-    <string name="the_image_of_the_mosque_logo_to_the_top_of_the_screen">the image of the mosque logo to the top of the screen</string>
-    <string name="todo">TODO</string>
-    <string name="image_logo">imgage logo</string>
-    <string name="hello">Hello</string>
-    <string name="next">Next</string>
-    <string name="finish">Finish</string>
-    <string name="back">Back</string>
-    <string name="john">John</string>
-    <string name="english">English</string>
+    <string name="app_name">إسلامي V2</string>
+    <string name="this_is_the_background_image_for_the_intro_screen">هذه هي صورة الخلفية لشاشة المقدمة</string>
+    <string name="the_image_of_the_mosque_logo_to_the_top_of_the_screen">صورة شعار المسجد في أعلى الشاشة</string>
+    <string name="todo">مهمة</string>
+    <string name="image_logo">شعار الصورة</string>
+    <string name="hello">مرحباً</string>
+    <string name="next">التالي</string>
+    <string name="finish">إنهاء</string>
+    <string name="back">رجوع</string>
+    <string name="john">جون</string>
+    <string name="english">الإنجليزية</string>
     <string-array name="languages">
-        <item>English</item>
-        <item>Arabic</item>
+        <item>الإنجليزية</item>
+        <item>العربية</item>
     </string-array>
 </resources>

@@ -30,7 +30,7 @@ class OnBoardingActivity : AppCompatActivity() {
             }
         )
         viewBinding.btnOnboardingRight.setOnClickListener{
-           onRightButtonClick()
+            onRightButtonClick()
         }
         viewBinding.btnOnboardingLeft.setOnClickListener{
             onLeftButtonClick()
