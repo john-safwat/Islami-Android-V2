@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.App.IslamiSplashScreen" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/black</item>
+        <item name="postSplashScreenTheme">@style/Theme.IslamiV2</item>
+        <item name="android:windowSplashScreenAnimatedIcon">@drawable/img_splash</item>
+        <item name="android:windowSplashScreenBrandingImage">@drawable/img_splash_branding</item>
+    </style>
+</resources>
