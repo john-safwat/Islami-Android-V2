@@ -1,20 +1,21 @@
 package com.john.islamiv2.OnBoarding
 
-import android.content.Intent
+import android.annotation.SuppressLint
 import android.content.res.Configuration
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.john.islamiv2.R
 import com.john.islamiv2.databinding.ItemOnBoardingPageBinding
 import java.util.Locale
 
-class OnBoardingViewPagerAdapter(private val onBoardingData: MutableList<OnBoardingData>) :
+class OnBoardingViewPagerAdapter(var onBoardingData: MutableList<OnBoardingData> , var lastLocal :String= "en") :
     RecyclerView.Adapter<OnBoardingViewPagerAdapter.OnBoardingViewHolder>() {
+
 
     inner class OnBoardingViewHolder(private val viewBinding: ItemOnBoardingPageBinding) :
         RecyclerView.ViewHolder(viewBinding.root) {
@@ -22,7 +23,6 @@ class OnBoardingViewPagerAdapter(private val onBoardingData: MutableList<OnBoard
             viewBinding.imgOnBoarding.setImageResource(onBoardingData.image)
             viewBinding.txtTitleOnboarding.text = onBoardingData.title
             if (position == 0) {
-
                 setLanguageSettings()
                 onLanguageDropDownMenuClick()
                 bindLanguagePage()
@@ -45,7 +45,10 @@ class OnBoardingViewPagerAdapter(private val onBoardingData: MutableList<OnBoard
                             1 -> "ar" // Arabic
                             else -> "en"
                         }
-                        applyLanguageChange(selectedLanguage)
+                        Log.e("Test" , "$lastLocal and $selectedLanguage")
+                        if(selectedLanguage != lastLocal){
+                            applyLanguageChange(selectedLanguage)
+                        }
                     }
 
                     override fun onNothingSelected(parent: AdapterView<*>) {
@@ -55,19 +58,18 @@ class OnBoardingViewPagerAdapter(private val onBoardingData: MutableList<OnBoard
         }
 
         private fun applyLanguageChange(languageCode: String) {
-            if (languageCode == "ar") {
-                val locale = Locale(languageCode)
-                Locale.setDefault(locale)
-                val configuration = Configuration(viewBinding.root.context.resources.configuration)
-                configuration.setLocale(locale)
-                viewBinding.root.context.resources.updateConfiguration(
-                    configuration,
-                    viewBinding.root.context.resources.displayMetrics
-                )
-                val intent = Intent(viewBinding.root.context, OnBoardingActivity::class.java)
-                viewBinding.root.context.startActivity(intent)
+            val locale = Locale(languageCode)
+            Locale.setDefault(locale)
+            val configuration = Configuration(viewBinding.root.context.resources.configuration)
+            configuration.setLocale(locale)
+            viewBinding.root.context.resources.updateConfiguration(
+                configuration,
+                viewBinding.root.context.resources.displayMetrics
+            )
+            lastLocal = languageCode
+            if (onLocalSelectListener != null) {
+                onLocalSelectListener?.onSelect()
             }
-
         }
 
         private fun setLanguageSettings() {
@@ -105,4 +107,12 @@ class OnBoardingViewPagerAdapter(private val onBoardingData: MutableList<OnBoard
         holder.bind(onBoardingData[position], position)
     }
 
+    fun interface OnLocalSelectListener {
+        fun onSelect()
+    }
+
+    var onLocalSelectListener: OnLocalSelectListener? = null
+    fun registerOnLocalSelectListener(listener: OnLocalSelectListener) {
+        onLocalSelectListener = listener
+    }
 }

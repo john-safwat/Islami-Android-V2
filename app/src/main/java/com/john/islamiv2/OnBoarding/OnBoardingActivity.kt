@@ -1,6 +1,6 @@
 package com.john.islamiv2.OnBoarding
 
-import android.content.SharedPreferences
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
@@ -18,8 +18,15 @@ class OnBoardingActivity : AppCompatActivity() {
         setContentView(viewBinding.root)
     }
 
+
+    @SuppressLint("NotifyDataSetChanged")
     private fun initViewPager() {
-        adapter = OnBoardingViewPagerAdapter(OnBoardingData.getOnBoardingData())
+        adapter = OnBoardingViewPagerAdapter(getOnBoardingData())
+        adapter.registerOnLocalSelectListener {
+            adapter.onBoardingData = getOnBoardingData()
+//            adapter.notifyDataSetChanged()
+            recreate()
+        }
         viewBinding.viewPagerOnBoarding.adapter = adapter
         viewBinding.dotsIndicator.attachTo(viewBinding.viewPagerOnBoarding)
         viewBinding.viewPagerOnBoarding.registerOnPageChangeCallback(
@@ -37,7 +44,23 @@ class OnBoardingActivity : AppCompatActivity() {
         }
     }
 
-
+    fun getOnBoardingData():MutableList<OnBoardingData>{
+        return mutableListOf(
+            OnBoardingData(R.drawable.img_onboarding_1 , getString(R.string.chose_language) , ""),
+            OnBoardingData(R.drawable.img_onboarding_2 ,
+                getString(R.string.welcome_to_islami) ,
+                getString(R.string.we_are_very_excited_to_have_you_in_our_community)),
+            OnBoardingData(R.drawable.img_onboarding_3 ,
+                getString(R.string.reading_the_quran) ,
+                getString(R.string.read_and_your_lord_is_the_most_generous)),
+            OnBoardingData(R.drawable.img_onboarding_4 ,
+                getString(R.string.bearish) ,
+                getString(R.string.praise_the_name_of_your_lord_the_most_high)),
+            OnBoardingData(R.drawable.img_onboarding_5 ,
+                getString(R.string.holy_quran_radio) ,
+                getString(R.string.you_can_listen_to_the_holy_quran_radio_through_the_application_for_free_and_easily)),
+        )
+    }
 
     private fun onPageChanged(position: Int) {
 
