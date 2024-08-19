@@ -1,6 +1,58 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.IslamiV2" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="Theme.IslamiV2" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+
+        <!-- enable window content transitions -->
+        <item name="android:windowActivityTransitions">true</item>
+        <!-- specify enter and exit transitions -->
+        <item name="android:windowEnterTransition">@transition/navigation_transation</item>
+        <item name="android:windowExitTransition">@transition/navigation_transation</item>
+
+        <item name="android:windowBackground">@color/black</item>
+        <item name="android:statusBarColor">@color/black</item>
+        <item name="android:windowNoTitle">true</item>
+
+
+    </style>
+
+    <style name="Theme.App.IslamiSplashScreen" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/black</item>
+        <item name="postSplashScreenTheme">@style/Theme.IslamiV2</item>
+    </style>
+
+    <style name="TextTitleLarge" parent="Theme.IslamiV2">
+        <item name="android:textSize">24sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/brown</item>
+    </style>
+
+    <style name="TextTitleMedium" parent="Theme.IslamiV2">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/brown</item>
+    </style>
+
+
+    <style name="TextTitleSmall" parent="Theme.IslamiV2">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/brown</item>
+    </style>
+
+    <style name="DropDownMenuStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+        <item name="boxBackgroundColor">@color/black</item>
+        <item name="boxCornerRadiusTopEnd">16dp</item>
+        <item name="boxCornerRadiusTopStart">16dp</item>
+        <item name="boxCornerRadiusBottomStart">16dp</item>
+        <item name="boxCornerRadiusBottomEnd">16dp</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/brown</item>
+        <item name="cornerRadius">8dp</item>
+        <item name="boxStrokeColor">@color/drop_down_outline_border_color</item>
+        <item name="boxStrokeWidth">2dp</item>
+        <item name="colorOutline">@color/brown</item>
+        <item name="android:layout_margin">5dp</item>
     </style>
 
 </resources>

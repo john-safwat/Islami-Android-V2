@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/img_background_intro"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:contentDescription="@string/this_is_the_background_image_for_the_intro_screen"
+        android:scaleType="centerCrop"
+        android:src="@drawable/img_intro_background"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/img_mosque_logo_header"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/the_image_of_the_mosque_logo_to_the_top_of_the_screen"
+        android:src="@drawable/img_mosque_header"
+        app:layout_constraintEnd_toEndOf="@id/img_background_intro"
+        app:layout_constraintStart_toStartOf="@id/img_background_intro"
+        app:layout_constraintTop_toTopOf="@id/img_background_intro"
+        app:layout_constraintWidth_percent="0.7" />
+
+    <ImageView
+        android:id="@+id/img_lamp_light"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginEnd="16dp"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/this_is_the_background_image_for_the_intro_screen"
+        android:src="@drawable/img_light"
+        app:layout_constraintEnd_toEndOf="@id/img_background_intro"
+        app:layout_constraintHeight_percent="0.4"
+        app:layout_constraintTop_toTopOf="@id/img_background_intro" />
+
+    <ImageView
+        android:id="@+id/img_flower_left"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/todo"
+        android:src="@drawable/img_flower_left"
+        app:layout_constraintHeight_percent="0.24"
+        app:layout_constraintStart_toStartOf="@id/img_background_intro"
+        app:layout_constraintTop_toBottomOf="@id/img_mosque_logo_header" />
+
+    <ImageView
+        android:id="@+id/img_intro_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/image_logo"
+        android:src="@drawable/img_splash"
+        app:layout_constraintBottom_toBottomOf="@id/img_background_intro"
+        app:layout_constraintEnd_toEndOf="@id/img_background_intro"
+        app:layout_constraintStart_toStartOf="@id/img_background_intro"
+        app:layout_constraintTop_toTopOf="@id/img_background_intro" />
+
+    <ImageView
+        android:id="@+id/img_flower_right"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/todo"
+        android:src="@drawable/img_flower_right"
+        app:layout_constraintBottom_toTopOf="@id/img_branding_logo"
+        app:layout_constraintEnd_toEndOf="@id/img_background_intro"
+        app:layout_constraintHeight_percent="0.24" />
+
+    <ImageView
+        android:id="@+id/img_branding_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:contentDescription="@string/image_logo"
+        android:src="@drawable/img_splash_branding"
+        app:layout_constraintBottom_toBottomOf="@id/img_background_intro"
+        app:layout_constraintEnd_toEndOf="@id/img_background_intro"
+        app:layout_constraintStart_toStartOf="@id/img_background_intro" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
