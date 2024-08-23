@@ -1,10 +1,11 @@
 package com.john.islamiv2.OnBoarding
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
+import com.john.islamiv2.Home.HomeActivity
 import com.john.islamiv2.R
 import com.john.islamiv2.databinding.ActivityOnBoardingBinding
 
@@ -23,8 +24,6 @@ class OnBoardingActivity : AppCompatActivity() {
     private fun initViewPager() {
         adapter = OnBoardingViewPagerAdapter(getOnBoardingData())
         adapter.registerOnLocalSelectListener {
-            adapter.onBoardingData = getOnBoardingData()
-//            adapter.notifyDataSetChanged()
             recreate()
         }
         viewBinding.viewPagerOnBoarding.adapter = adapter
@@ -112,7 +111,9 @@ class OnBoardingActivity : AppCompatActivity() {
     }
 
     private fun navigateToHomeActivity() {
-
+        val intent = Intent(this, HomeActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 
 }

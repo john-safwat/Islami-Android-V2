@@ -9,7 +9,6 @@
     <string name="finish">Finish</string>
     <string name="back">Back</string>
     <string name="john">John</string>
-    <string name="english">English</string>
     <string name="chose_language">Chose Language</string>
     <string name="welcome_to_islami">Welcome To Islami</string>
     <string name="we_are_very_excited_to_have_you_in_our_community">We Are Very Excited To Have You In Our Community</string>
@@ -19,8 +18,14 @@
     <string name="praise_the_name_of_your_lord_the_most_high">Praise the name of your Lord, the Most High</string>
     <string name="holy_quran_radio">Holy Quran Radio</string>
     <string name="you_can_listen_to_the_holy_quran_radio_through_the_application_for_free_and_easily">You can listen to the Holy Quran Radio through the application for free and easily</string>
-    <string-array name="languages">
-        <item>English</item>
-        <item>Arabic</item>
-    </string-array>
+    <string name="home">Home</string>
+    <string name="quran">Quran</string>
+    <string name="hadeth">Hadeth</string>
+    <string name="sebha">Sebha</string>
+    <string name="radio">Radio</string>
+    <string name="time">Time</string>
+    <string name="backgorund_image">Backgorund Image</string>
+    <string name="sura_name">Sura Name</string>
+    <string name="arabic">Arabic</string>
+    <string name="english">English</string>
 </resources>
