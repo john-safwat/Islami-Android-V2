@@ -1,94 +1,98 @@
 package com.john.islamiv2.OnBoarding
 
-import android.annotation.SuppressLint
+import android.content.Context
 import android.content.res.Configuration
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
+import android.widget.AdapterView.OnItemClickListener
 import android.widget.ArrayAdapter
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.INVISIBLE
+import androidx.recyclerview.widget.RecyclerView.VISIBLE
+import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.john.islamiv2.R
 import com.john.islamiv2.databinding.ItemOnBoardingPageBinding
 import java.util.Locale
 
-class OnBoardingViewPagerAdapter(var onBoardingData: MutableList<OnBoardingData> , var lastLocal :String= "en") :
+class OnBoardingViewPagerAdapter(private var onBoardingData: MutableList<OnBoardingData>) :
     RecyclerView.Adapter<OnBoardingViewPagerAdapter.OnBoardingViewHolder>() {
 
+    @Suppress("DEPRECATION")
+    inner class OnBoardingViewHolder(val viewBinding: ItemOnBoardingPageBinding) :
+        ViewHolder(viewBinding.root) {
 
-    inner class OnBoardingViewHolder(private val viewBinding: ItemOnBoardingPageBinding) :
-        RecyclerView.ViewHolder(viewBinding.root) {
         fun bind(onBoardingData: OnBoardingData, position: Int) {
             viewBinding.imgOnBoarding.setImageResource(onBoardingData.image)
             viewBinding.txtTitleOnboarding.text = onBoardingData.title
             if (position == 0) {
-                setLanguageSettings()
-                onLanguageDropDownMenuClick()
-                bindLanguagePage()
+                bindLocalSelectionView()
             } else {
-                bindDefaultPage(onBoardingData.description)
+                bindDefaultView(onBoardingData.description)
             }
+
+        }
+
+        private fun bindLocalSelectionView() {
+            setUpDropDownMenu()
+            onLanguageDropDownMenuClick()
+            viewBinding.txtDescriptionOnboarding.visibility = INVISIBLE
+            viewBinding.autoCompleteTextView.setDropDownBackgroundTint(
+                viewBinding.root.resources.getColor(R.color.black)
+            )
+            viewBinding.autoCompleteTextView.visibility = VISIBLE
         }
 
         private fun onLanguageDropDownMenuClick() {
-            viewBinding.dropdownLanguagesMenu.onItemSelectedListener =
-                object : AdapterView.OnItemSelectedListener {
-                    override fun onItemSelected(
-                        parent: AdapterView<*>,
-                        view: View?,
-                        position: Int,
-                        id: Long
-                    ) {
-                        val selectedLanguage = when (position) {
-                            0 -> "en" // English
-                            1 -> "ar" // Arabic
-                            else -> "en"
-                        }
-                        Log.e("Test" , "$lastLocal and $selectedLanguage")
-                        if(selectedLanguage != lastLocal){
-                            applyLanguageChange(selectedLanguage)
-                        }
-                    }
-
-                    override fun onNothingSelected(parent: AdapterView<*>) {
-                        // No action needed
-                    }
-                }
-        }
-
-        private fun applyLanguageChange(languageCode: String) {
-            val locale = Locale(languageCode)
-            Locale.setDefault(locale)
-            val configuration = Configuration(viewBinding.root.context.resources.configuration)
-            configuration.setLocale(locale)
-            viewBinding.root.context.resources.updateConfiguration(
-                configuration,
-                viewBinding.root.context.resources.displayMetrics
-            )
-            lastLocal = languageCode
-            if (onLocalSelectListener != null) {
+            viewBinding.autoCompleteTextView.setOnItemClickListener { parent, _, position, _ ->
+                val selectedLocal = parent.getItemAtPosition(position).toString()
+                val localCode =
+                    if (selectedLocal == "English" || selectedLocal == "الإنجليزية") "en_US" else "ar"
+                setLocalDropDownTitle(selectedLocal)
+                setLocale(viewBinding.root.context, localCode)
                 onLocalSelectListener?.onSelect()
             }
         }
 
-        private fun setLanguageSettings() {
-            val languages = viewBinding.root.resources.getStringArray(R.array.languages)
-            val arrayAdapterLanguages =
-                ArrayAdapter(super.itemView.context, R.layout.item_drop_down, languages)
-            viewBinding.dropdownLanguagesMenu.setAdapter(arrayAdapterLanguages)
-
+        private fun setLocale(context: Context, localCode: String) {
+            val local = Locale(localCode)
+            Locale.setDefault(local)
+            val configuration = Configuration(context.resources.configuration)
+            configuration.setLocale(local)
+            context.resources.updateConfiguration(configuration, context.resources.displayMetrics)
         }
 
-        private fun bindLanguagePage() {
-            viewBinding.txtDescriptionOnboarding.visibility = View.INVISIBLE
-            viewBinding.dropdownLanguagesMenu.visibility = View.VISIBLE
+        private fun setUpDropDownMenu() {
+            val localsList = arrayOf(
+                viewBinding.root.resources.getString(R.string.english),
+                viewBinding.root.resources.getString(R.string.arabic),
+            )
+            val dropDownAdapter =
+                ArrayAdapter(viewBinding.root.context, R.layout.item_drop_down, localsList)
+            setupDefaultLocal()
+            viewBinding.autoCompleteTextView.setAdapter(dropDownAdapter)
         }
 
-        private fun bindDefaultPage(description: String) {
-            viewBinding.txtDescriptionOnboarding.visibility = View.VISIBLE
+        private fun setupDefaultLocal() {
+            val currentLocal =
+                viewBinding.root.resources.configuration.locales.get(0).displayLanguage
+            if (currentLocal.equals("English") || currentLocal.equals("en_us")) {
+                setLocalDropDownTitle("English")
+            } else {
+                setLocalDropDownTitle("العربية")
+            }
+        }
+
+        private fun setLocalDropDownTitle(local: String) {
+            viewBinding.autoCompleteTextView.setText(local)
+        }
+
+        private fun bindDefaultView(description: String) {
             viewBinding.txtDescriptionOnboarding.text = description
-            viewBinding.dropdownLanguagesMenu.visibility = View.INVISIBLE
+            viewBinding.txtDescriptionOnboarding.visibility = VISIBLE
+            viewBinding.dropdownLanguagesMenu.visibility = INVISIBLE
         }
 
     }
@@ -107,11 +111,12 @@ class OnBoardingViewPagerAdapter(var onBoardingData: MutableList<OnBoardingData>
         holder.bind(onBoardingData[position], position)
     }
 
+
     fun interface OnLocalSelectListener {
         fun onSelect()
     }
 
-    var onLocalSelectListener: OnLocalSelectListener? = null
+    private var onLocalSelectListener: OnLocalSelectListener? = null
     fun registerOnLocalSelectListener(listener: OnLocalSelectListener) {
         onLocalSelectListener = listener
     }
