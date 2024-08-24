@@ -1,22 +1,21 @@
-package com.john.islamiv2.Home.Tabs.Quran
+package com.john.islamiv2.UI.Home.Tabs.Radio
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.john.islamiv2.databinding.FragmentQuranBinding
+import com.john.islamiv2.databinding.FragmentRadioBinding
 
-class QuranFragment : Fragment() {
+class RadioFragment : Fragment() {
 
-    lateinit var viewBinding:FragmentQuranBinding
+    lateinit var viewBinding:FragmentRadioBinding
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
-        viewBinding = FragmentQuranBinding.inflate(inflater,container,false)
+    ): View? {
+        viewBinding = FragmentRadioBinding.inflate(inflater,container,false)
         return viewBinding.root
     }
-
 }

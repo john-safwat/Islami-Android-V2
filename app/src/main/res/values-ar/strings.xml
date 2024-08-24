@@ -28,4 +28,6 @@
     <string name="backgorund_image">Backgorund Image</string>
     <string name="sura_name">اسم السورة</string>
     <string name="arabic">العربية</string>
+    <string name="most_recent">الأحدث</string>
+    <string name="suras_list">قائمة السور</string>
 </resources>

@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="16dp">
+    android:layout_height="match_parent">
 
     <include
         android:id="@+id/img_onBoarding_logo"
@@ -18,6 +17,8 @@
         android:id="@+id/view_pager_on_boarding"
         android:layout_width="0dp"
         android:layout_height="0dp"
+
+        android:layout_marginBottom="24dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -48,6 +49,7 @@
         style="@style/TextTitleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         app:layout_constraintBottom_toBottomOf="@id/dots_indicator"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/dots_indicator"
@@ -58,6 +60,7 @@
         style="@style/TextTitleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
         android:text="@string/next"
         app:layout_constraintBottom_toBottomOf="@id/dots_indicator"
         app:layout_constraintEnd_toEndOf="parent"

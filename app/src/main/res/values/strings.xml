@@ -28,4 +28,6 @@
     <string name="sura_name">Sura Name</string>
     <string name="arabic">Arabic</string>
     <string name="english">English</string>
+    <string name="most_recent">Most Recent</string>
+    <string name="suras_list">Suras List</string>
 </resources>
