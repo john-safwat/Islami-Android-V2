@@ -1,19 +1,17 @@
-package com.john.islamiv2.Home
+package com.john.islamiv2.UI.Home
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import com.john.islamiv2.Home.Tabs.Hadeth.HadethFragment
+import com.john.islamiv2.UI.Home.Tabs.Hadeth.HadethFragment
 import com.john.islamiv2.Home.Tabs.Hadeth.TimeFragment
-import com.john.islamiv2.Home.Tabs.Quran.QuranFragment
-import com.john.islamiv2.Home.Tabs.Radio.RadioFragment
-import com.john.islamiv2.Home.Tabs.Sebha.SebhaFragment
+import com.john.islamiv2.UI.Home.Tabs.Quran.QuranFragment
+import com.john.islamiv2.UI.Home.Tabs.Radio.RadioFragment
+import com.john.islamiv2.UI.Home.Tabs.Sebha.SebhaFragment
 import com.john.islamiv2.R
 import com.john.islamiv2.databinding.ActivityHomeBinding
 
 class HomeActivity() : AppCompatActivity() {
-    private var firstFragment:Boolean= true
-    private var fragmentsIdsList = mutableListOf<Int>()
     private lateinit var viewBinding: ActivityHomeBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,14 +26,14 @@ class HomeActivity() : AppCompatActivity() {
                 R.id.navigation_more -> { TimeFragment() }
                 else -> { QuranFragment() }
             }
-            setFragment(fragment , item.itemId)
+            setFragment(fragment)
             true
         }
         viewBinding.bottomNavigationBar.selectedItemId = R.id.navigation_quran
 
     }
 
-    private fun setFragment(fragment: Fragment, itemId: Int) {
+    private fun setFragment(fragment: Fragment) {
         supportFragmentManager
             .beginTransaction()
             .replace(viewBinding.contentContainer.id, fragment)

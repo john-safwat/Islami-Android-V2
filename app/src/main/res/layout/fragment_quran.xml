@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -40,6 +41,7 @@
         app:startIconTint="@color/brown">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/text_field_seura_search_input"
             style="@style/TextFiledTextStyle"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -48,6 +50,54 @@
             android:textColor="@color/white" />
     </com.google.android.material.textfield.TextInputLayout>
 
+    <TextView
+        android:visibility="visible"
+        android:id="@+id/txt_most_recent"
+        style="@style/TextTitleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:text="@string/most_recent"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@id/rv_most_recent_suras"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_field_seura_search" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:visibility="visible"
+        android:id="@+id/rv_most_recent_suras"
+        android:layout_width="match_parent"
+        android:layout_height="130dp"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintTop_toBottomOf="@id/txt_most_recent"
+        tools:itemCount="100"
+        tools:listitem="@layout/item_recent_card" />
+
+    <TextView
+        android:visibility="visible"
+        android:id="@+id/txt_suras_list"
+        style="@style/TextTitleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:text="@string/suras_list"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rv_most_recent_suras" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:visibility="visible"
+        android:id="@+id/rv_suras_list"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txt_suras_list"
+        tools:itemCount="100"
+        tools:listitem="@layout/item_sura_card" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
