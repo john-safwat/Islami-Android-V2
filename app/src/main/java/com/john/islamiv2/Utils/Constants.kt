@@ -9,6 +9,7 @@ class Constants {
         const val EN_DISPLAY_LANGUAGE_CODE = "en_us"
         const val ARABIC_LOCAL_CODE = "ar"
         const val ENGLISH_LOCAL_CODE = "en_US"
+        const val SURA_EXTRA_KEY = "sura"
     }
 
 }

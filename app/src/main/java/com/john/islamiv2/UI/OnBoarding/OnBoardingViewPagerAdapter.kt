@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.INVISIBLE
 import androidx.recyclerview.widget.RecyclerView.VISIBLE
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
+import com.john.islamiv2.Models.OnBoardingData
 import com.john.islamiv2.R
 import com.john.islamiv2.Utils.Constants
 import com.john.islamiv2.databinding.ItemOnBoardingPageBinding

@@ -1,30 +1,17 @@
-package com.john.islamiv2.UI.Home.Tabs.Quran
+package com.john.islamiv2.Models
 
-import android.os.Parcel
 import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class Sura(
     val id: Int,
     val englishTitle: String,
     val arabicTitle: String,
     val versesNumber: String
-):Parcelable {
+): Parcelable {
 
-    constructor(parcel: Parcel) : this(
-        parcel.readInt(),
-        parcel.readString()!!,
-        parcel.readString()!!,
-        parcel.readString()!!
-    )
-
-    companion object CREATOR : Parcelable.Creator<Sura>{
-        override fun createFromParcel(parcel: Parcel): Sura {
-            return Sura(parcel)
-        }
-
-        override fun newArray(size: Int): Array<Sura?> {
-            return arrayOfNulls(size)
-        }
+    companion object{
         fun getListOfSuras(): MutableList<Sura> {
             val arabicQuranSuras = listOf(
                 "الفاتحه",
@@ -387,18 +374,6 @@ data class Sura(
             }
             return surasList
         }
-
-    }
-
-    override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeInt(id)
-        parcel.writeString(englishTitle)
-        parcel.writeString(arabicTitle)
-        parcel.writeString(versesNumber)
-    }
-
-    override fun describeContents(): Int {
-        return 0
     }
 
 }
