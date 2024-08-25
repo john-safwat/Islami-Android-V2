@@ -20,11 +20,11 @@
     <string name="holy_quran_radio">إذاعة القرآن الكريم</string>
     <string name="you_can_listen_to_the_holy_quran_radio_through_the_application_for_free_and_easily">يمكنك الاستماع إلى إذاعة القرآن الكريم من خلال التطبيق بسهولة ومجاناً</string>
     <string name="home">Home</string>
-    <string name="quran">Quran</string>
-    <string name="hadeth">Hadeth</string>
-    <string name="sebha">Sebha</string>
-    <string name="radio">Radio</string>
-    <string name="time">Time</string>
+    <string name="quran">القران</string>
+    <string name="hadeth">احاديث</string>
+    <string name="sebha">سبحة</string>
+    <string name="radio">راديو</string>
+    <string name="time">مواقيت</string>
     <string name="backgorund_image">Backgorund Image</string>
     <string name="sura_name">اسم السورة</string>
     <string name="arabic">العربية</string>

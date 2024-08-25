@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
+import com.john.islamiv2.Models.OnBoardingData
 import com.john.islamiv2.UI.Home.HomeActivity
 import com.john.islamiv2.R
 import com.john.islamiv2.databinding.ActivityOnBoardingBinding

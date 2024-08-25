@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
+import com.john.islamiv2.Models.Sura
 import com.john.islamiv2.databinding.ItemRecentCardBinding
 
 
@@ -12,7 +13,7 @@ class MostRecentSourasRecyclerViewAdapter(val surasList: List<Sura>) :
 
     inner class MostRecentSurasViewHolder(val viewBinding: ItemRecentCardBinding) :
         ViewHolder(viewBinding.root) {
-        fun bind(sura: Sura , isLastIndex: Boolean) {
+        fun bind(sura: Sura, isLastIndex: Boolean) {
             viewBinding.txtCardArabicSuraTitle.text = sura.arabicTitle
             viewBinding.txtCardEnglishSuraTitle.text = sura.englishTitle
             "${sura.versesNumber} Verses".also { viewBinding.txtCardVersesNumber.text = it }
