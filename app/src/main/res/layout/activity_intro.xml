@@ -37,7 +37,7 @@
         android:adjustViewBounds="true"
         android:contentDescription="@string/this_is_the_background_image_for_the_intro_screen"
         android:src="@drawable/img_light"
-        app:layout_constraintEnd_toEndOf="@id/img_background_intro"
+        app:layout_constraintRight_toRightOf="@id/img_background_intro"
         app:layout_constraintHeight_percent="0.4"
         app:layout_constraintTop_toTopOf="@id/img_background_intro" />
 
@@ -49,7 +49,7 @@
         android:contentDescription="@string/todo"
         android:src="@drawable/img_flower_left"
         app:layout_constraintHeight_percent="0.24"
-        app:layout_constraintStart_toStartOf="@id/img_background_intro"
+        app:layout_constraintLeft_toLeftOf="@id/img_background_intro"
         app:layout_constraintTop_toBottomOf="@id/img_mosque_logo_header" />
 
     <ImageView
@@ -71,7 +71,7 @@
         android:contentDescription="@string/todo"
         android:src="@drawable/img_flower_right"
         app:layout_constraintBottom_toTopOf="@id/img_branding_logo"
-        app:layout_constraintEnd_toEndOf="@id/img_background_intro"
+        app:layout_constraintRight_toRightOf="@id/img_background_intro"
         app:layout_constraintHeight_percent="0.24" />
 
     <ImageView
