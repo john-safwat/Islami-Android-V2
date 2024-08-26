@@ -30,4 +30,5 @@
     <string name="arabic">العربية</string>
     <string name="most_recent">الأحدث</string>
     <string name="suras_list">قائمة السور</string>
+    <string name="search_using_word_in_hadeth">البحث باستخدام الكلمة في الحديث</string>
 </resources>

@@ -113,9 +113,12 @@ class QuranFragment : Fragment() {
 
     // function to init most recent suras recycler view and the on click listener
     private fun initMostRecentSurasRecyclerView() {
-        // TODO set the item on Click Listener
         mostRecentSourasRecyclerViewAdapter =
             MostRecentSourasRecyclerViewAdapter(mostRecentSurasList)
+        mostRecentSourasRecyclerViewAdapter.onItemClickListener =
+            MostRecentSourasRecyclerViewAdapter.OnItemClickListener {
+                navigateToSuraDetailsActivity(it)
+            }
         viewBinding.rvMostRecentSuras.adapter = mostRecentSourasRecyclerViewAdapter
     }
 
@@ -123,7 +126,7 @@ class QuranFragment : Fragment() {
     private fun navigateToSuraDetailsActivity(sura: Sura) {
         val intent = Intent(activity, SuraDetailsActivity::class.java)
         intent.putExtra(Constants.SURA_EXTRA_KEY, sura)
-        startActivity(intent , ActivityOptions.makeSceneTransitionAnimation(activity).toBundle())
+        startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(activity).toBundle())
     }
 
 }

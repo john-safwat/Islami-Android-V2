@@ -30,4 +30,5 @@
     <string name="english">English</string>
     <string name="most_recent">Most Recent</string>
     <string name="suras_list">Suras List</string>
+    <string name="search_using_word_in_hadeth">Search Using Word in Hadith</string>
 </resources>

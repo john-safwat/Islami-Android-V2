@@ -24,36 +24,45 @@
         <item name="android:textSize">24sp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/brown</item>
+        <item name="android:fontFamily">@font/janna</item>
     </style>
 
     <style name="TextTitleMedium" parent="Theme.IslamiV2">
         <item name="android:textSize">20sp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/brown</item>
+        <item name="android:fontFamily">@font/janna</item>
     </style>
 
     <style name="TextTitleSmall" parent="Theme.IslamiV2">
         <item name="android:textSize">16sp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/brown</item>
+        <item name="android:fontFamily">@font/janna</item>
     </style>
 
     <style name="CardTextTitleLarge" parent="Theme.IslamiV2">
         <item name="android:textSize">24sp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/black</item>
+        <item name="android:fontFamily">@font/janna</item>
+
     </style>
 
     <style name="CardTextTitleSmall" parent="Theme.IslamiV2">
         <item name="android:textSize">14sp</item>
         <item name="android:textStyle">normal</item>
         <item name="android:textColor">@color/black</item>
+        <item name="android:fontFamily">@font/janna</item>
+
     </style>
 
     <style name="TextFiledTextStyle" parent="TextAppearance.Material3.SearchBar">
         <item name="android:textSize">14sp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textColorHint">@color/text_field_color</item>
+        <item name="android:fontFamily">@font/janna</item>
+
     </style>
 
     <style name="DropDownMenuStyle" parent="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
@@ -82,6 +91,7 @@
         <item name="titleTextColor">@color/brown</item>
         <item name="android:background">@color/transparent</item>
         <item name="titleCentered">true</item>
+        <item name="android:fontFamily">@font/janna</item>
     </style>
 
 </resources>
