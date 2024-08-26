@@ -1,7 +1,8 @@
 package com.john.islamiv2.UI.OnBoarding
 
 import android.content.Context
-import android.content.res.Configuration
+import android.content.SharedPreferences
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
@@ -12,8 +13,8 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.john.islamiv2.Models.OnBoardingData
 import com.john.islamiv2.R
 import com.john.islamiv2.Utils.Constants
+import com.john.islamiv2.Utils.LocalManager
 import com.john.islamiv2.databinding.ItemOnBoardingPageBinding
-import java.util.Locale
 
 class OnBoardingViewPagerAdapter(private var onBoardingData: MutableList<OnBoardingData>) :
     RecyclerView.Adapter<OnBoardingViewPagerAdapter.OnBoardingViewHolder>() {
@@ -22,9 +23,16 @@ class OnBoardingViewPagerAdapter(private var onBoardingData: MutableList<OnBoard
     @Suppress("DEPRECATION")
     inner class OnBoardingViewHolder(val viewBinding: ItemOnBoardingPageBinding) :
         ViewHolder(viewBinding.root) {
+        var sharedPreferences: SharedPreferences? = null
 
         // Binds data to the views within the onboarding page item
         fun bind(onBoardingData: OnBoardingData, position: Int) {
+            if (sharedPreferences == null) {
+                sharedPreferences = viewBinding.root.context.getSharedPreferences(
+                    Constants.SHARED_PREFERENCES_KEY,
+                    Context.MODE_PRIVATE
+                )
+            }
             viewBinding.imgOnBoarding.setImageResource(onBoardingData.image)
             viewBinding.txtTitleOnboarding.text = onBoardingData.title
             if (position == 0) {
@@ -44,28 +52,15 @@ class OnBoardingViewPagerAdapter(private var onBoardingData: MutableList<OnBoard
             viewBinding.autoCompleteTextView.setDropDownBackgroundTint(
                 viewBinding.root.resources.getColor(R.color.black)
             ) // Set dropdown background color
-            viewBinding.autoCompleteTextView.visibility = VISIBLE // Show thedropdown
+            viewBinding.autoCompleteTextView.visibility = VISIBLE // Show the dropdown
         }
 
         // Handles language selection from the dropdown menu
         private fun onLanguageDropDownMenuClick() {
             viewBinding.autoCompleteTextView.setOnItemClickListener { parent, _, position, _ ->
                 val selectedLocal = parent.getItemAtPosition(position).toString()
-                val localCode =
-                    if (selectedLocal == Constants.EN_LOCAL_ENGLISH_TITLE || selectedLocal == Constants.EN_LOCAL_ARABIC_TITLE) Constants.ENGLISH_LOCAL_CODE else Constants.ARABIC_LOCAL_CODE // Determine locale code
-                setLocalDropDownTitle(selectedLocal) // Update the dropdown title
-                setLocale(viewBinding.root.context, localCode) // Change the app's locale
-                onLocalSelectListener?.onSelect() // Notify listener of locale change
+                changeLocal(selectedLocal)
             }
-        }
-
-        // Updates the app's locale based on the selected language
-        private fun setLocale(context: Context, localCode: String) {
-            val local = Locale(localCode)
-            Locale.setDefault(local)
-            val configuration = Configuration(context.resources.configuration)
-            configuration.setLocale(local)
-            context.resources.updateConfiguration(configuration, context.resources.displayMetrics)
         }
 
         // Sets up the dropdown menu with language options
@@ -76,22 +71,37 @@ class OnBoardingViewPagerAdapter(private var onBoardingData: MutableList<OnBoard
             )
             val dropDownAdapter =
                 ArrayAdapter(viewBinding.root.context, R.layout.item_drop_down, localsList)
-            setupDefaultLocal() // Set the initial language based on current locale
+            setupDefaultLocalTitle() // Set the initial language based on current locale
             viewBinding.autoCompleteTextView.setAdapter(dropDownAdapter)
         }
 
         // Determines and sets the default language for the dropdown
-        private fun setupDefaultLocal() {
-            val currentLocal =
-                viewBinding.root.resources.configuration.locales.get(0).displayLanguage
-            if (currentLocal.equals(Constants.EN_LOCAL_ENGLISH_TITLE) || currentLocal.equals(
-                    Constants.EN_DISPLAY_LANGUAGE_CODE
-                )
-            ) {
-                setLocalDropDownTitle(Constants.EN_LOCAL_ENGLISH_TITLE)
+        private fun setupDefaultLocalTitle() {
+            val currentLocal = sharedPreferences?.getString(
+                Constants.LOCAL_KEY,
+                viewBinding.root.resources.getString(R.string.english)
+            )
+            if (currentLocal.equals(viewBinding.root.resources.getString(R.string.english))) {
+                setLocalDropDownTitle(viewBinding.root.resources.getString(R.string.english))
             } else {
-                setLocalDropDownTitle(Constants.AR_LOCAL_ARABIC_TITLE)
+                setLocalDropDownTitle(viewBinding.root.resources.getString(R.string.arabic))
             }
+        }
+
+        private fun changeLocal(selectedLocal: String) {
+            val localCode =
+                if (selectedLocal == viewBinding.root.resources.getString(R.string.english)) Constants.ENGLISH_LOCAL_CODE else Constants.ARABIC_LOCAL_CODE // Determine locale code
+            LocalManager.setLocale(
+                viewBinding.root.context,
+                localCode
+            ) // Change the app's locale
+            val title =
+                if (localCode == Constants.ENGLISH_LOCAL_CODE) viewBinding.root.resources.getString(
+                    R.string.english
+                ) else viewBinding.root.resources.getString(R.string.arabic)
+            sharedPreferences?.edit()?.putString(Constants.LOCAL_KEY, title)?.apply()
+            setLocalDropDownTitle(title) // Update the dropdown title
+            onLocalSelectListener?.onSelect() // Notify listener of locale change
         }
 
         // Updates the title displayed in the language dropdown

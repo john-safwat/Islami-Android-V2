@@ -54,5 +54,5 @@ dependencies {
     implementation(libs.androidx.core.splashscreen.v101)
     implementation (libs.paper.onboarding)
     implementation(libs.dotsindicator)
-
+    implementation (libs.carouselrecyclerview)
 }

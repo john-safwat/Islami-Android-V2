@@ -13,10 +13,13 @@ class MostRecentSourasRecyclerViewAdapter(val surasList: List<Sura>) :
 
     inner class MostRecentSurasViewHolder(val viewBinding: ItemRecentCardBinding) :
         ViewHolder(viewBinding.root) {
-        fun bind(sura: Sura, isLastIndex: Boolean) {
+        fun bind(sura: Sura) {
             viewBinding.txtCardArabicSuraTitle.text = sura.arabicTitle
             viewBinding.txtCardEnglishSuraTitle.text = sura.englishTitle
             "${sura.versesNumber} Verses".also { viewBinding.txtCardVersesNumber.text = it }
+            viewBinding.root.setOnClickListener{
+                onItemClickListener?.onItemClick(sura)
+            }
         }
     }
 
@@ -36,8 +39,15 @@ class MostRecentSourasRecyclerViewAdapter(val surasList: List<Sura>) :
     }
 
     override fun onBindViewHolder(holder: MostRecentSurasViewHolder, position: Int) {
-        holder.bind(surasList[position] ,position == surasList.size-1)
+        holder.bind(surasList[position])
     }
+
+    var onItemClickListener: OnItemClickListener? =null
+
+    fun interface OnItemClickListener {
+        fun onItemClick(sura: Sura)
+    }
+
 
 
 }
