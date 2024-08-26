@@ -94,4 +94,11 @@
         <item name="android:fontFamily">@font/janna</item>
     </style>
 
+    <style name="SebhaTextStyle" parent="Theme.IslamiV2">
+        <item name="android:textSize">36sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:gravity">center</item>
+        <item name="fontFamily">@font/janna</item>
+    </style>
+
 </resources>
