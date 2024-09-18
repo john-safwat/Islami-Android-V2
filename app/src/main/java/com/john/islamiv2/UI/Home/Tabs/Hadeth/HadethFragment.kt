@@ -95,7 +95,7 @@ class HadethFragment : Fragment() {
 
     private fun navigateToHadithDetailsScreen(hadith: Hadith) {
         val intent = Intent(activity , HadithDetailsActivity::class.java)
-        intent.putExtra(Constants.Hadith_EXTRA_KEY, hadith)
+        intent.putExtra(Constants.HADITH_EXTRA_KEY, hadith)
         startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(activity).toBundle())
 
     }

@@ -8,7 +8,7 @@ import com.john.islamiv2.Models.Sura
 import com.john.islamiv2.databinding.ItemRecentCardBinding
 
 
-class MostRecentSourasRecyclerViewAdapter(val surasList: List<Sura>) :
+class MostRecentSourasRecyclerViewAdapter(private var surasList: List<Sura>) :
     RecyclerView.Adapter<MostRecentSourasRecyclerViewAdapter.MostRecentSurasViewHolder>() {
 
     inner class MostRecentSurasViewHolder(val viewBinding: ItemRecentCardBinding) :
@@ -48,6 +48,10 @@ class MostRecentSourasRecyclerViewAdapter(val surasList: List<Sura>) :
         fun onItemClick(sura: Sura)
     }
 
+    fun updateSurasList(surasList: MutableList<Sura>){
+        this.surasList = surasList
+        notifyDataSetChanged()
+    }
 
 
 }

@@ -1,17 +1,35 @@
 package com.john.islamiv2.Models
 
+import android.icu.util.LocaleData
+import android.os.Build
 import android.os.Parcelable
+import androidx.annotation.RequiresApi
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import kotlinx.parcelize.Parcelize
+import java.time.LocalDate
+import java.time.LocalDateTime
+import java.util.Calendar
+import java.util.Date
+import java.util.Locale
 
+@Entity("Suras")
 @Parcelize
-data class Sura(
-    val id: Int,
-    val englishTitle: String,
-    val arabicTitle: String,
-    val versesNumber: String
-): Parcelable {
+data class Sura @RequiresApi(Build.VERSION_CODES.O) constructor(
+    @PrimaryKey
+    val id: Int? = null,
+    @ColumnInfo
+    val englishTitle: String? = null,
+    @ColumnInfo
+    val arabicTitle: String? = null,
+    @ColumnInfo
+    val versesNumber: String? = null,
+    @ColumnInfo
+    var updateTime: Int = System.currentTimeMillis().toInt()
+) : Parcelable {
 
-    companion object{
+    companion object {
         fun getListOfSuras(): MutableList<Sura> {
             val arabicQuranSuras = listOf(
                 "الفاتحه",
@@ -362,10 +380,10 @@ data class Sura(
                 "'6"
             )
             val surasList = mutableListOf<Sura>()
-            for(i in ayaNumber.indices){
+            for (i in ayaNumber.indices) {
                 surasList.add(
                     Sura(
-                        i+1,
+                        i + 1,
                         englishQuranSurahs[i],
                         arabicQuranSuras[i],
                         ayaNumber[i]

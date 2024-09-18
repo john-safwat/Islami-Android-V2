@@ -26,7 +26,7 @@ class HadithDetailsActivity : AppCompatActivity() {
     }
 
     private fun initViewParameters() {
-        val hadith = intent.getParcelableExtra<Hadith>(Constants.Hadith_EXTRA_KEY)!!
+        val hadith = intent.getParcelableExtra<Hadith>(Constants.HADITH_EXTRA_KEY)!!
         viewBinding.toolBar.title = hadith.title
         viewBinding.mainContent.txtAhadithTitle.txtTitle.text = hadith.title
         viewBinding.mainContent.tvHadithContent.text = hadith.content

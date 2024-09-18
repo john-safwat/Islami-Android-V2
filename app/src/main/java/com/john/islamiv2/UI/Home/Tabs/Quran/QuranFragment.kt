@@ -13,6 +13,7 @@ import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.view.Window
 import androidx.fragment.app.Fragment
+import com.john.islamiv2.Database.SurasDatabase
 import com.john.islamiv2.Models.Sura
 import com.john.islamiv2.R
 import com.john.islamiv2.UI.SuraDetails.SuraDetailsActivity
@@ -25,6 +26,7 @@ class QuranFragment : Fragment() {
     private lateinit var mostRecentSourasRecyclerViewAdapter: MostRecentSourasRecyclerViewAdapter
     private lateinit var surasListRecyclerViewAdapter: SurasListRecyclerViewAdapter
     private var surasList = Sura.getListOfSuras()
+    private var surasDatabase :SurasDatabase? = SurasDatabase.getDatabase()
     private var mostRecentSurasList = Sura.getListOfSuras()
     private var searchSurasList = mutableListOf<Sura>()
     override fun onCreateView(
@@ -64,11 +66,11 @@ class QuranFragment : Fragment() {
             searchSurasList = mutableListOf()
         } else {
             searchSurasList = surasList.filter {
-                it.englishTitle.lowercase().contains(query.lowercase())
+                it.englishTitle!!.lowercase().contains(query.lowercase())
             }.toMutableList()
             if (searchSurasList.isEmpty()) {
                 searchSurasList = surasList.filter {
-                    it.arabicTitle.lowercase().contains(query.lowercase())
+                    it.arabicTitle!!.lowercase().contains(query.lowercase())
                 }.toMutableList()
             }
         }
@@ -80,6 +82,11 @@ class QuranFragment : Fragment() {
         updateView()
     }
 
+    override fun onResume() {
+        super.onResume()
+        mostRecentSurasList = surasDatabase?.surasDao()?.getAllSuras() ?: mutableListOf()
+        mostRecentSourasRecyclerViewAdapter.updateSurasList(mostRecentSurasList)
+    }
 
     private fun initView() {
         initMostRecentSurasRecyclerView()
@@ -106,6 +113,7 @@ class QuranFragment : Fragment() {
         surasListRecyclerViewAdapter = SurasListRecyclerViewAdapter(surasList)
         surasListRecyclerViewAdapter.onItemClickListener =
             SurasListRecyclerViewAdapter.OnItemClickListener {
+                insertSuraToDatabase(it)
                 navigateToSuraDetailsActivity(it)
             }
         viewBinding.rvSurasList.adapter = surasListRecyclerViewAdapter
@@ -113,13 +121,24 @@ class QuranFragment : Fragment() {
 
     // function to init most recent suras recycler view and the on click listener
     private fun initMostRecentSurasRecyclerView() {
+        mostRecentSurasList = surasDatabase?.surasDao()?.getAllSuras() ?: mutableListOf()
         mostRecentSourasRecyclerViewAdapter =
             MostRecentSourasRecyclerViewAdapter(mostRecentSurasList)
         mostRecentSourasRecyclerViewAdapter.onItemClickListener =
             MostRecentSourasRecyclerViewAdapter.OnItemClickListener {
+                insertSuraToDatabase(it)
                 navigateToSuraDetailsActivity(it)
             }
         viewBinding.rvMostRecentSuras.adapter = mostRecentSourasRecyclerViewAdapter
+    }
+
+    private fun insertSuraToDatabase(sura:Sura) {
+        sura.updateTime = System.currentTimeMillis().toInt()
+        if(!mostRecentSurasList.contains(sura)){
+            surasDatabase?.surasDao()?.addSura(sura)
+        }else {
+            surasDatabase?.surasDao()?.updateSura(sura)
+        }
     }
 
     // navigation function
