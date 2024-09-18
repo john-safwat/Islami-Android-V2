@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
     id("kotlin-parcelize")
+    id("kotlin-kapt")
 }
 
 android {
@@ -55,4 +56,8 @@ dependencies {
     implementation (libs.paper.onboarding)
     implementation(libs.dotsindicator)
     implementation (libs.carouselrecyclerview)
+
+    implementation(libs.androidx.room.runtime)
+    kapt(libs.androidx.room.compiler)
+
 }

@@ -11,13 +11,13 @@ import com.john.islamiv2.databinding.FragmentSebhaBinding
 class SebhaFragment : Fragment() {
 
     lateinit var viewBinding: FragmentSebhaBinding
-    val tasbihTitle = listOf(
+    private val tasbihTitle = listOf(
         "سبحان الله",
         "الحمد لله",
         "الله اكبر"
     )
-    var selectedIndex = 0
-    var tasbehCount = 0
+    private var selectedIndex = 0
+    private var tasbehCount = 0
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -45,7 +45,7 @@ class SebhaFragment : Fragment() {
     }
 
     private fun rotateSebhaBody() {
-        viewBinding.imgSebhaBody.rotation += 20
+        viewBinding.imgSebhaBody.animate().rotationBy(22f).setDuration(500).start()
     }
 
     private fun updateView() {
